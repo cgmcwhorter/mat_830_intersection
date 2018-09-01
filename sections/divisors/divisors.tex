@@ -1,0 +1,840 @@
+% !TEX root = ../../intersection_theory.tex
+
+\newpage
+%Divisors 
+\section{Divisors}
+
+
+First, a bit of background. 
+
+\begin{dfn}[Sheaf Modules]
+Let $(X,\co_X)$ be a ringed space. A sheaf of $\co_X$-modules (or simply an $\co_X$-module) is a sheaf $\cf$ on $X$ such that for each open set $U \subseteq X$, the group $\cf(U)$ is an $\co_X(U)$-module and for each inclusion of open sets $V \subseteq U$, the restriction homomorphism $\cf(U) \to \cf(V)$ is compatible with the module structure via the ring homomorphism $\co_X(U) \ma{\rho_{U,V}} \co_X(V)$: $a \in \cf(U)$, $r \in \co_X(U)$, then $\rho_{U,V}(ra)=\rho_{U,V}(r) \rho_{U,V}(a)$. 
+	\[
+	\begin{tikzcd}
+	\co_X(V) \times \cf(V) \arrow{d}{\rho_{V,U} \times \rho_{V,U}} \arrow{r} & \cf(V) \arrow{d} \\
+	\co_X(U) \times \cf(U) \arrow{r} & \cf(U)
+	\end{tikzcd}
+	\] 
+\end{dfn}
+
+
+\begin{dfn}[Morphism]
+A morphism $\cf \to \cg$ of sheaves of $\co_X$-modules is a morphism of sheaves such that for each open set $U \subseteq X$, the map $\cf(U) \to \cg(U)$ is a homomorphism of $\co_X(U)$-modules. 
+\end{dfn}
+
+
+Note that the kernel, cokernel, and image of a morphism of $\co_X$-modules is again an $\co_X$-module is again an $\co_X$-module. If $\cf'$ is a subsheaf of $\co_X$-modules fo an $\co_X$-module $\cf$, then the quotient sheaf $\cf/\cf'$ is an $\co_X$-module. Any direct sum, product, limit, or inverse limit of $\co_X$-modules is an $\co_X$-module. If $\cf$ and $\cf$ are two $\co_X$-modules, we denote the group of morphisms from $\cf$ to $\cg$ by $\Hom_{\co_X}(\cf,\cg)$ or sometimes $\Hom_X(\cf,\cg)$. A sequence of $\co_X$-modules and morphisms is exact if and only if it is exact as a sequence of sheaves of abelian groups. 
+
+If $U$ is an open subset of $X$ and if $\cf$ is an $\co_X$-module, then $\cf|_U$ is an $\co_X$-module. If $\cf$ and $\cg$ are two $\co_X$-modules, the presheaf $U \mapsto \Hom_{\co_X|U}(\cf|_U,\cg|_U)$ is a sheaf, which we call the sheaf Hom and denote by $\Hom_{\co_X},(\cf,\cg)$. It is also an $\co_X$-module. We define the tensor product of two $\co_X$-modules as the sheaf associated to the presheaf $U \mapsto \cf(U) \otimes_{\co(X)} \cg(U)$. Sometimes, we write $\cf \otimes \cg$. An $\co_X$-module $\cf$ is free if and only if it is isomorphic to a direct sum of copies of $\co_X$. It is locally free if $X$ can be covered by open sets $U$ for which it is a free $\co_X|_U$ module. It is important to know that locally free does not imply free. In that case the rank of $\cf$ on such an open set is the number of copies of the structure sheaf needed (finite or infinite). If $X$ is connected, the rank of a locally free sheaf is the same everywhere. We call this the rank of the sheaf. A locally free sheaf of rank 1 is called an invertible sheaf. A sheaf of ideals on $X$ is a sheaf of modules $\ci$ which is a subsheaf of $\co_X$. In other words for every open set $U$, $\ci(U)$ is an ideal in $\co_X(U$). Let $f: (X,\co_X) \to (Y,\co_Y)$ be a morphism of ringed spaces. If $\cf$ is an $\co_X$-module, then $f_*\cf$ is an $f_*\co_X$-module. Since we have the morphism $f^\#: \co_Y \to f_*\co_X$ of sheaves of rings on $Y$, this gives $f_*\cf$ a natural structure of $\co_Y$-module. We call it the direct image of $\cf$ by the morphism $f$. Now let $\cg$ be a sheaf of $\co_X$-modules. Then $f^{-1}\cg$ is an $f^{-1} \co_Y$-module. Because of the adjoint property of $f^{-1}$, we have a morphism $f^{-1} \co_Y \to \co_X$ of sheaves of rings on $X$. We define $f^*\cg$ to be the tensor product $f^{-1}\cg \otimes_{f^{-1}\co_Y} \co_X$. Note that if we have a map $f: A \to B$ and $N$ and $M$ are $A,B$-modules, respectively. A module over $B$ is automatically a module over $A$. Is there a way to make a module over $A$ into a module over $B$? If $N$ and $B$ are both $A$-modules, then $N \otimes_A B$ is a $B$-module. Thus, $f^*\cg$ is an $\co_X$-module. We call it the inverse image of $\cg$ by the morphism $f$. 
+
+
+Now onto schemes. 
+
+
+\begin{dfn}
+Let $A$ be a ring and $M$ an $A$-module. We define the sheaf associated to $M$ on $\spec A$, denoted by $\tilde{M}$, as follows: for each prime ideal $p \subseteq A$, define $M_p$ to be the localization of $M$ at $p$. For any open set $U \subseteq \spec A$. We define the group $\tilde{M}(U)$ to be the set of functions $s: U \to \sqcup_{p \in U} M_p$ such that for each $p \in U$, $s(p) \in M_p$ and such that $s$ is locally a fraction $m/f$ with $m \in M$ and $f \in A$. To be precise, we require that for each $p \in U$, there is a neighborhood $V$ of $p$ in $U$ and there are elements $m \in M$ and $f \in A$ such that for each $q \in V$, $f \notin q$, and $s(q)=m/f$ in $M_q$. We make $\tilde{M}$ into a sheaf using the obvious restriction maps. 
+\end{dfn}
+
+
+Note that when $M=A$, you get $\co_X$. 
+
+\begin{prop}
+Let $A$ be a ring, $M$ an $A$-module, and $\tilde{M}$ be the sheaf on $X=\spec A$ associated to $M$, then:
+	\begin{enumerate}[(a)]
+	\item $\tilde{M}$ is an $\co_X$-module
+	\item for each $p \in X$, the stalk $(\tilde{M})_p$ of the sheaf $\tilde{M}$ at $p$ is isomorphic to the localization module $M_p$. 
+	\item for any $f \in A$, the $A_f$-module $\tilde{M}(D(f))$ is isomorphic to the localization module $M_f$
+	\item in particular, $\Gamma(X,\tilde{M}) \cong M$.
+	\end{enumerate}
+\end{prop}
+
+
+\begin{dfn}[Coherent]
+Let $(X,\co_X)$ be a scheme. A sheaf of $\co_X$-modules $\cf$ is quasi-coherent if $X$ can be covered by open affine subschemes $U_i=\spec A_i$ such that for each $i$ there is an $A_i$-module $M_i$ with $\cf\big|_{U_i} \cong \tilde{M}_i$. We say that $\cf$ is coherent if furthermore each $M_i$ can be taken to be a finitely generated $A_i$-module. 
+\end{dfn}
+
+
+\begin{ex}
+On any scheme $X$, the structure each $\co_X$ is quasi-coherent and in fact coherent. Take $A_i=M_i$.
+\end{ex}
+
+
+\begin{exc}
+Show that a sheaf of $\co_X$-modules $\cf$ on a scheme $X$ is quasi-coherent if and only if every point of $X$ has a neighborhood $U$ such that $\cf\big|_U$ is isomorphic to a cokernel of a morphism of free sheaves on $U$. If $X$ is noetherian, then $\cf$ is coherent if and only if it is locally a cokernel of a morphism of free sheaves of finite rank. [These properties were originally the definition of quasi-coherent and coherent sheaves.] 
+	\[
+	\co_X\big|_{U}^{m_i} \ma{} \co_X\big|_{U}^{n_i} \ma{} \cf\big|_U \ma{} 0
+	\]
+$m_i,n_i$ perhaps $\infty$ for quasi-coherent. Now if $m_i,n_i<\infty$, then it is coherent. You must assume noetherian usually for coherent to be much better than quasi-coherent.
+\end{exc}
+
+
+\begin{prop}
+Let $X$ be a scheme. Then a $\co_X$-module $\cf$ is quasi-coherent if and only if for every open affine subset $U=\spec A$ of $X$, there is an $A$-module $M$ such that $\cf\big|_U \cong \tilde{M}$. If $X$ is noetherian, then $\cf$ is coherent if and only if the same is true with the extra condition that $M$ be a finitely generated $A$-module. 
+\end{prop}
+
+
+\begin{prop}
+Let $X$ be a scheme. The kernel, cokernel, and image of any morphism of quasi-coherent sheaves are quasi-coherent. Any extension of quasi-coherent sheaves is quasi-coherent. If $X$ is noetherian, the same is true for coherent sheaves. 
+\end{prop}
+
+
+\begin{prop}
+Let $f: X \to Y$ be a morphism of schemes. 
+	\begin{enumerate}[(a)]
+	\item if $\cg$ is a quasi-coherent sheaf of $\co_Y$-modules, then $f^*\cg$ is a quasi-coherent sheaf of $\co_X$-modules.
+	\item if $X$ and $Y$ are noetherian and $\cg$ is cohere, then $f^*\cg$ is coherent.
+	\item Assume that either $X$ is noetherian or $f$ is quasi-compact and separated, then $\cf$ is a quasi-coherent sheaf of $\co_X$-modules, $f_*\cf$ is a quasi-coherent sheaf of $\co_Y$-modules.
+	\end{enumerate}
+\end{prop}
+
+
+\begin{rem}
+If $X$ and $Y$ are noetherian, it is not true in general that $f_*$ of a coherent sheaf is coherent. However, it is true that if $f$ is a finite morphism or a projective morphism or more generally a proper morphism. 
+\end{rem}
+
+
+\begin{dfn}
+Let $Y$ be a closed subscheme of a scheme $X$ and $i: Y \to X$ be the inclusion morphism. We define the ideal sheaf of $Y$, denoted $\ci_Y$, to be the kernel of the morphism $i^\#: \co_X \to i_* \co_Y$. 
+\end{dfn}
+
+
+\begin{prop}
+Let $X$ be a scheme. For a closed subscheme $Y$ of $X$, the corresponding ideal sheaf $\ci_Y$ is a quasi-coherent sheaf of ideals of $X$. If $X$ is noetherian, it is coherent. Conversely, any quasi-coherent sheaf of ideals on $X$ is the ideal sheaf of a uniquely determined closed subscheme of $X$.
+\end{prop}
+
+
+\begin{exc}
+Let $X$ be a noetherian scheme and let $\cf$ be a coherent sheaf (on $X$).
+	\begin{enumerate}[(a)]
+	\item if the stalk $\cf_X$ is a free $\co_X$-module for some point $x \in X$, then there is a neighborhood $U$ of $x$ such that $\cf\big|_U$ is free.
+	\item $\cf$ is locally free if and only if the stalks $\cf_X$ are free $\co_X$-modules for all $x \in X$.
+	\item $\cf$ is invertible, i.e. locally free of rank 1, if and only if there is a coherent sheaf $\cg$ such that $\cf \otimes \cg \cong \co_X$. [This justifies the terminology invertible: it means that $\cf$ is an invertible element of the monoid of coherent sheaves under the operation $\otimes$.]
+	\end{enumerate}
+[Hint: $\cg$ is the dual of $\cf$. $\tilde{\cf} = \Hom_{\co_X}(\cf,\co_X)$.]
+\end{exc}
+
+
+Isomorphism classes of locally free rank one sheaves form a group under $\otimes$. The identity is $\co_X$ and $M \otimes_A A \cong M$. Sometimes, this is denoted $\Pic X$, the Picard group of $X$. The line bundles, up to isomorphism, are equivalent to locally free sheaves of rank 1, up to isomorphism. These are both equivalent to Cartier divisors module rational equivalences. 
+
+
+\begin{exc}
+Let $Y$ be a scheme and let $\mathcal{S}$ be a quasi-coherent sheaf of $\co_Y$-algebras, i.e. a sheaf of rings which is at the same time a quasi-coherent sheaf of $\co_Y$-modules. Show that there is a unique scheme $X$ and a morphism $f: X \to Y$ such that for every affine open $V \subseteq Y$, $f^{-1}(V) \cong \spec \mathcal{S}(V)$ and for every inclusion $U \to V$ of open affines of $Y$, the morphism $f^{-1}(U) \to f^{-1}(V)$ corresponds to the restriction homomorphism $\mathcal{S}(V) \to \mathcal{S}(U)$. The scheme is called $\spec A$. [Hint: Construct $X$ by gluing together schemes $\spec \mathcal{S}(V)$ for $V$ open affine in $Y$.] $V=\spec A$ and $\mathcal{S}(V)$ must be an $A$-algebra. Now $\mathcal{S}(V)$ is a ring and $A \to \mathcal{S}(V)$ so there is a map $\spec \mathcal{S}(V) \to \spec A=V$.
+\end{exc}
+
+
+For modules $M$ and $A$, recall the tensor algebra of $M$, $\oplus_{i=0}^\infty M^{\otimes i}$ and the symmetric algebra $\oplus_{i=0}^\infty \text{Sym}^i(M)$. If $M$ is free of rank $n$, $\text{Sym}(M)=A[x_1,\ldots,x_n]$. You can do this all for sheaves of $\co_X$-modules. 
+
+
+\begin{exc}
+Let $Y$ be a scheme. A (geometric) vector bundle of rank $n$ over $Y$ is a scheme $X$ and a morphism $f: X \to Y$, together with additional data consisting of an open covering $\{U_i\}$ of $Y$ and isomorphisms $\psi_i: f^{-1}(U_i) \to \A^n_{U_i}= \A^n \times U_i$, such that for any $i,j$ and any open affine subset $V=\spec A \subseteq U_i \cap U_j$ (remembering the affine opens are a base for the topology) the automorphism $\psi=\psi_j \circ \psi_i^{-1}$ of $\A^n_V=\spec A[x_1,\ldots,x_n]$ is given by a linear automorphism $\theta$ of $A[x_1,\ldots,x_n]$, i.e. $\theta(a)=a$ for any $a \in A$ and $\theta(x_i)=\sum a_{ij} x_j$ for suitable $a_{ij} \in A$. 
+	\begin{enumerate}[(a)]
+	\item Let $\mathcal{E}$ be a locally free sheaf of rank $n$ on a scheme $Y$. Let $S(\mathcal{E})$ be the symmetric algebra on $\mathcal{E}$ and let $X=\spec S(\mathcal{E})$ with projection morphism $f: X \to Y$. For each affine open subset $U \subseteq Y$ for which $\mathcal{E}\big|_U$ is free, choose a basis of $\mathcal{E}$ and let $\psi: f^{-1}(U) \to \A^n_U$ be the isomorphism resulting from the identification of $S(\mathcal{E}(U))$ with $\co(U)[x_1,\ldots,x_n]$. Then $(X,f,\{U_i\},\{\psi_i\})$ is a vector bundle of rank $n$ over $Y$ which does not depend on the basis of $\mathcal{E}(U)$ chosen. We call it the geometric vector bundle associated to $\mathcal{E}$ and denote it by $V(\mathcal{E})$.
+	\item For any morphism $f: X \to Y$ a section of $f$ over an open set $U\subseteq Y$ is a morphism $s: U \to X$ such that $f \circ s=1_U$. It is clear how to restrict sections to smaller open sets or how to glue them together so to see that the presheaf $U \mapsto$ the set of sections over $U$ is a sheaf of sets on $Y$ which we denote by $\mathcal{I}(X\setminus Y)$. Show that if $f: X \to Y$ is a vector bundle of rank $n$ then the sheaf of sections $\mathcal{I}(X \setminus Y)$ has a natural structure of $\co_Y$-modules which makes it a locally free $\co_Y$-module of rank $n$.
+	\item Show that these are the `reverse' to each other. 
+	\end{enumerate}
+\end{exc}
+
+
+\begin{dfn}
+A vector bundle $E$ of rank $r$ on a scheme $X$ is a scheme $E$ equipped with a morphism $\pi: E \to X$ satisfying the following condition: there must be an open covering $\{U_i\}$ of $X$ and isomorphisms $\phi_i$ of $\pi^{-1}(U_i)$ with $U_i \times \A^r$ over $U_i$ such that over $U_i \cap U_j$ the composites $\phi_i \circ \phi_j^{-1}$ are linear, i.e. given by a morphism $g_{ij}: U_i \cap U_J \to \text{GL}(r,k)$. These transition functions satisfy
+	\[
+	g_{ik}= g_{ij} g_{jk}, \quad g_{ij}^{-1}=g_{ji}, \quad g_{ii}=1
+	\]
+Conversely, any such transition functions determine a vector bundle. 
+\end{dfn}
+
+
+Now let $X$ be a $n$-dimensional variety. [Although, what will follow could be done for any algebraic scheme.] 
+
+\begin{dfn}[Weil/Cartier Divisor]
+A Weil divisor on $X$ is an element of $Z_{n-1} X$. A Cartier divisor on $X$ is defined by data $(U_\alpha,f_\alpha)$ where the $U_\alpha$ form an open (affine) covering of $X$ and the $f_\alpha$ are nonzero functions in $R(U_\alpha)=R(X)$, subject to the condition that $f_\alpha/f_\beta$ is a unit, i.e. regular, nowhere vanishing function on $U_\alpha \cap U_\beta$. The rational functions $f_\alpha$ are called local equations of $D$ (the Cartier divisors); they are well defined up to multiplication by units on $U_\alpha$. If you replace $f_\alpha$ by $g_\alpha f_\alpha$, where $g_\alpha$ is a regular nowhere vanishing function on $U_\alpha$, we call that the same divisor. 
+\end{dfn}
+
+
+When do $(U_\alpha,f_\alpha)$, $(U_\beta,h_\beta)$ give the same Cartier divisor? 
+	\[
+	\begin{split}
+	(U_\alpha, f_\alpha) \ma{\simeq} (U_\alpha \cap U_\beta, f_\alpha) \\
+	(U_\beta, h_\beta) \ma{\simeq} (U_\alpha \cap U_\beta, h_\alpha) 
+	\end{split}
+	\]
+These two need to be the same by the previous criterion. Now when is a Cartier divisor a Weil divisor? If $D$ is a Cartier divisor on $X$ and $V$ is a subvariety of $X$ of codimension one, write $\ord_V D= \ord_V f(\alpha)$, where $\ord_V$ is the order function on $R(X)$, $f_\alpha$ is the local equation for $D$ on $U$, where $U_\alpha \cap V \neq \emptyset$, multiplying $f_\alpha$ by $g_\alpha$ -- a regular nowhere vanishing function on $U_\alpha$ -- does not change the order: given another $U_\beta$, $U_\beta \cap V \neq \emptyset$ and $\ord_V(f_\beta)=\ord_V(f_\alpha)$ as $f_\alpha/f_\beta$ is a unit on $U_\alpha \cap U_\beta$. Define $[D]$ the Weil divisor associated to $D$ by 
+	\[
+	[D]=\sum_{\substack{V \subset X \text{ codim}\\ \text{1 subvariety}}} \ord_V D[V]
+	\]
+The sum is finite for the same reason the divisor of a rational function is finite. 
+
+
+You can make the Cartier divisors into a group, $\Div(X)$: $D$, $(U_\alpha,f_\alpha)$, $E$, $(U_\alpha,g_\alpha)$, then $D+E=(U_\alpha,f_\alpha g_\alpha)$. Since $\ord_V$ is additive, $\ord_V(f_\alpha g_\alpha)= \ord_V f_\alpha + \ord_V g_\alpha$. Therefore, there is a group homomorphism $\Div(X) \to Z_{n-1}(X)$.
+
+
+Given $f \in R(X)^*$, you make a Cartier divisor $(X,f)$. These form a subgroup of $\Div(X)$. The Weil divisors associated to this are $\div(f)$. Define two Cartier divisors $D,D'$ to be linearly equivalent if and only if $D' - D=\div f$; the Picard group is defined as $\Pic(X):= \Div(X)/\text{linear equivalence}$. We get a homomorphism $\Pic(X) \top A_{n-1} X$. The homomorphism is in general neither injective nor surjective. The problem is that codimension 1 subvarieties that are locally defined by one equation. 
+If $X$ is nonsingular, then all codimension subvarieties are locally defined by an equation so that it is an isomorphism. Recall that in Hartshorne, there is a theorem about intersecting a subvariety of $\P^n$ with a hypersurface in $\P^n$. One thing that made the theorem work was that a hypersurface was defined by one equation. Cartier divisors generalize this---they are locally defined by a single equation. We will see that we can intersect any cycle in $Z_*X$ with a Cartier divisor. There is not a good way to intersect with Weil divisors. 
+
+
+The support of a Cartier divisor $D$, denoted $\supp(D)$ or $|D|$ is the union of all subvarieties $Z$ of $X$ such that the local equation for $D$ in the local ring $\co_{Z,X}$ is not a unit. This is a closed algebraic subset of $X$. On a general scheme $X$, an effective Cartier divisor is a subscheme which is locally defined by one equation, which is required to be a non-zerodivisor. Now a locally free sheaf of rank 1 is the same as an invertible sheaf which is the same as line bundles. The special case of locally free sheaves of rank $n$ are the same as vector bundles of rank $n$. We want to bring Cartier divisors into this. That is, we want Cartier divisors on arbitrary schemes. Let $X$ be an algebraic scheme. For each affine open set $U$ of $X$, let $K(U)$ be the total quotient ring of the coordinate ring $A(U)$, i.e. the localization of $A(U)$ at the multiplicative system of elements which are not zerodivisors. This determines a presheaf on $X$ whose associated sheaf is denoted $\K$.
+
+
+Let $\K^*$ denote the multiplicative sheaf of invertible elements in $\K$ and $\co^*$ the sheaf of invertible elements in $\co=\co_X$. A Cartier divisor $D$ on $X$ is a section of the sheaf $\K^*/\co^*$, this means a global section---an element of $\K^*/\co^*(X)$. Connect this with the other definition: an affine open cover $\{U_i\}$ of $X$. If $f_i \in K(U_i)$, then $f_i/f_j$ was a unit on $U_i \cap U_j$. Do the $f_i$ fit together to give a global section of $\K$ or $\K^*$? Do they agree on overlaps? Not quite, but they do agree up to elements of $\co^*(U_i \cap U_j)$. So they do fit together to give a section over $X$ of $\K^*/\co^*$. A Cartier divisor $D$ on a scheme $X$ determines a line bundle on $X$, denoted $\co_X(D)$ or $\co(D)$. The sheaf of sections of $\co(D)$ may be defined to be the $\co_X$-subsheaf of $\K$ generated on $U_i$ by $f_i^{-1}$. [This gives a locally free sheaf of rank 1.] Equivalently, the transition functions for $\co(D)$ with respect to the covering $U_i$ are $g_{ij}= f_i/f_j$. Therefore, we have the following diagram
+	\[
+	\begin{tikzcd}
+	\text{line bundle} \arrow{rr} \arrow[dotted,yshift=0.5ex]{dr} & & \text{locally free rank 1} \arrow{ll} \arrow[dotted,yshift=-1ex]{dl} \\
+	& \text{Cartier divisor} \arrow[yshift=-1ex]{ul} \arrow[yshift=0.5ex]{ur} & 
+	\end{tikzcd}
+	\]
+The dotted arrows do not always work but the scheme has to be rather `weird' for these not to be all solid arrows. If the locally free rank 1 sheaf is a subsheaf of $\K$, you can go backwards. The local generators can be taken as $f_i$ for your divisor. If $\cf \subset \K$, $\cf$ is free of rank 1 over $U_i$: take a basis (one element) for $\cf(U)$ over $\co(U_i)$, $f_i \in \K(U_i)$. These $f_i$ define a Cartier divisor. For most reasonable schemes, every locally free rank 1 sheaves are isomorphic to subsheaves of $\K$. On a scheme where every Cartier divisor is Weil, then line bundles are Weil there is a map from line bundles to Weil divisors by taking the divisor of a rational section. 
+
+
+\begin{ex}[EGA, IV.21.6]
+If $X$ is normal (respectively, locally factorial) then $\Div X \to Z_{n-1} X$ and $\Pic X \to A_{n-1} X$ are injective (respectively, isomorphisms). Recall that $X$ is normal if and only if for every affine open $\Spec A \subset X$, $A$ is integrally closed in its quotient field. Recall also that $X$ is locally factorial if and only if every point $P \in X$, the local ring $\co_{P,X}$ is a UFD. 
+\end{ex}
+
+
+Recall from commutative algebra that a regular local ring is a UFD and in a UFD that every height 1 prime is principal. 
+
+
+\begin{ex}
+Let $X$ be the projective curve over $\C$ defined by the homogeneous equation $y^2z=x^3$. Then $A_0X \cong \Z$ and the homomorphism $\Pic X \to A_0X$ is surjective with kernel the additive group of $\C$. In the case that $X$ is the curve $y^2z=x^2z+^3$, the kernel is $\C^*$.
+\end{ex}
+
+
+\begin{ex}
+Take the curve $y^2z=x^3$ on the affine patch $z=1$. Then we have the cusp $y^2=x^3$. 
+	\[
+	k[x,y]/(y^2-x^3) \cong k[t^2,t^3]
+	\]
+The ideal $(t^2,t^3)$ is the ideal of the origin, which is not principal. If you blow up the point, you resolve the singularity: $\P^1 \to X$ surjects and $\P^1 \setminus \{\text{point}\}$ is isomorphic to $\C$. 
+\end{ex}
+
+
+\begin{ex}
+Let $X$ be the surface in $\A^2$ defined by the equation $z^2=xy$. The line $z=x=0$ (a generator for the cone) defines a Weil divisor which is not a Cartier divisor. In this case, $\Pic X=0$ and $A,X= \Z/2\Z$. 
+\end{ex}
+
+
+
+
+
+%Line Bundles and Pseudo-Divisors
+\section{Line Bundles and Pseudo-Divisors}
+
+
+Cartier divisors are nice as one can always intersect with them. However, you can not always pull them back via morphism $f: X \to Y$. Say $D$ is a Cartier divisor on $Y$. If not component of $|D|$ contains any component of $f(X)$, you can define $f^*D$ as a Cartier divisor on $X$ by pulling back all the local equations. But if some component of $f(x) \subset |D|$, then some equations that define $D$ pull back to something that vanishes on a component of $X$ and you do not get a divisor. 
+
+
+\begin{dfn}[Pseudo-Divisor]
+A pseudo-divisor on a scheme $X$ is a triple $(L,Z,s)$, where $L$ is a line bundle on $X$, $Z$ is a closed subset of $X$, and $s$ is a nowhere vanishing section of $L$ on $X\setminus Z$ (equivalently, $s$ is a trivialization of the restriction of $L$ to $X \setminus Z$). [If you pick at random on $X, L, Z$, you probably cannot find $s$ so that $(L,Z,s)$ is a pseudo-divisor.] We call $L$ the line bundle, $Z$ the support, and $s$ the section of the pseudo-divisor. Data $(L',Z',s')$ define the same pseudo-divisor if $Z=Z'$ and there is an isomorphism $\sigma$ of $L$ with $L'$ such that the restriction of $\sigma$ to $X \setminus Z$ takes $s$ to $s'$. 
+\end{dfn}
+
+
+Note that a pseudo-divisor with support $X$ is simply an isomorphism class of line bundles on $X$. Any Cartier divisor $D$ on a scheme $X$ determines a pseudo-divisor $(\co_X(D),|D|,s_D)$ on $X$, where $\co_X(D)$ is the line bundle of $D$, $|D|$ is the support of $D$, and $s_D$ is the canonical section of $\co_X(D)$. Let $\{(U_i,f_i)\}$ define a Cartier divisor. We saw the transition functions for $\co_X(D)$ were $g_{ij}=\frac{f_i}{f_j}$ on $U_i \cap U_j$. Let $f: \co_X(D) \to X$ be the line bundle. We have isomorphisms $f^{-1}(U_i) \cong U_i \times \A^1=U_i \times k$, where $k$ is a field. On $U_i \setminus |D|$, $f_i \neq 0,\infty$ so $f_i$ gives a nonzero section of $\co_X(D)$ over $U_i$. On overlaps $U_i \cap U_J$, $f_i=\frac{f_i}{f_j} f_i$, $f_i= g_{ij}f_j$ says these sections over $U_i \setminus |D|$ glue to give a section over $X \setminus |D|$, call that $s_D$. We say that a Cartier divisor represents a pseudo-divisor $(L,Z,s)$ if $|D| \subset Z$ and there is an isomorphism from $\co_X(D)$ to $L$ over $X \setminus Z$ which takes $s_D$ to $s$. Note that we allow $z$ to be larger than $|D|$. For example, if $Z=X$, all linearly equivalent Cartier divisors represent the same Cartier divisor: $D \sim D' \Longleftrightarrow \co_X(D) \cong \co_X(D')$. A general pseudo-divisor will often be denoted by a single letter $D$, we write $\co_X(D)$ for its line bundle, $|D|$ for its support, and $s_D$ for its section. This agrees with the notation for Cartier divisors, except that a Cartier divisor may have smaller support than the pseudo-divisor it represents. 
+
+
+\begin{lem}
+If $X$ is a variety, any pseudo-divisor $(L,Z,s)$ on $X$ is represented by some $D$ on $X$. Moreover,
+	\begin{enumerate}[(a)]
+	\item If $Z \neq X$, $D$ is uniquely determined 
+	\item If $Z=x$, $D$ is determined up to linear equivalence
+	\end{enumerate}
+\end{lem}
+
+
+If $D$ is a pseudo-divisor on an $n$-dimensional variety $X$ and $|D|$ is its support, define the divisor class $[D] \in A_{n-1}(|D|)$ of $D$ as follows: take a Cartier divisor which represents $D$ and let $[D]$ be the class in $A_{n-1}(|D|)$ of the associated Weil divisor. Why is it in $A_{n-1}(|D|)$ and not $A_{n-1}(X)$? Say our pseudo-divisor $D$ is $D=(L,Z,s)$ and our representing Cartier divisor is $E$. $|E| \subset Z =|D|$ and when taking the Weil divisor associated to $E$ only subvarieties contained in $|E|$ can appear with nonzero coefficient. Thus, it can be thought of as being in $A_{n-1}(|D|)$. To get the most out of this intersection theory, Fulton always wants to have everything defined in the smallest possible place. If $V$ is a closed subscheme of $X$ on $i: V \to X$ the inclusion morphism, $i$ is proper. Given anything $\alpha \in A_kV$, you can get $i_*\alpha \in A_kX$. But if you have something in $A_kX$ you cannot always get something in $A_kV$. Having something defined in the smallest possible closed set contains the most information. In case $|D| \neq X$, this Cartier divisor is unique and then $[D] \in Z_{n-1}(|D|)$ as reflected in the fact that $Z_{n-1}(|D|)=A_{n-1}(|D|)$. In the case $|D|=X$, the Cartier divisor is only determined up to linear equivalence, but its associated Weil divisor is well defined in $A_{n-1}(X)$. If $D=(L,Z,s)$ and $D'=(L',Z',s')$ are pseudo-divisors on $X$, the sum $D+D'$ is the pseudo-divisor: $D+D'=(L \otimes L', Z \cup Z', s \otimes s')$. This agrees with the sum for Cartier divisors except that the sum of two Cartier divisors may have smaller support than the union of their supports: $E=(U_i,f_i)$, $E'=(U_i,f_i')$, $E+E'=(U_i,f_if_i')$. If $f_i$ and $f_i'$ have zeros of poles that cancel, $|E+E'|$ can be smaller than $|E| \cup |E'|$. Similarly, define $-D= (L^{-1},Z,\frac{1}{s})$ (note $L^{-1}=L^*$---the dual). For fixed $Z \subset X$ closed, the pseudo-divisors with support $Z$ form an abelian group. If you do not fix $Z$, $D+D'-D'$ might not equal $D$.
+
+\begin{dfn}[Weil divisor]
+
+\end{dfn}
+
+
+Line bundles always pull back $f: X' \to X$, you have a line bundle on $X$ given by $\{U_i\}$ with transition data $g_{ij} \in \co_X^*(U_i \cap U_j)$. $f^*L$ is given by $\{f^{-1}(U_i)\}$ with transition data $f^*(g_{ij}) \in \co_X'(f^{-1}(U_i) \cap f^{-1}(U_j))$. If $f: X' \to X$ and $D=(L,Z,s)$ is a pseudo-divisor on $X$, $f^*(D)$ is a pseudo-divisor on $X'$, given by $(f^*(L),f^{-1}(Z),f^*s)$. The ``nice'' pseudo-divisors are $|D| \neq X$. If $f(X') \subset Z$, then $f^*(D)$ will have $f^*(D)|=X'$. 
+
+
+\subsection{Intersecting with Divisors}
+
+
+\begin{dfn}
+Let $D$ be a pseudo-divisor on a scheme $X$ and let $V$ be a $k$-dimensional subvariety of $X$. Define a class, denoted $D \cdot [V]$ or $D \cdot V$ in $A_{k-1}(|D| \cap V)$ as follows: let $j$ be the inclusion of $V$ in $X$. The restriction (puu-back) $j^*D$ is a pseudo-divisor on $V$ whose support is $|D| \cap V$. Define $D \cdot [V]$ to be the Weil divisor class of $j^*D$. Define $D \cdot V=[j^*D]$. THen $j^*D$ is a pseudo-divisor on $V$. Extend this by linearity.
+\end{dfn}
+
+
+\begin{prop} \hfill
+\begin{enumerate}
+\item If $D$ is a pseudo-divisor on $X$ and $\alpha,\alpha'$ are $k$-cycles on $X$, then $D\cdot(\alpha + \alpha')=D \cdot \alpha + D \cdot \alpha'$ in $A_{k-1}(|D| \cap (|\alpha| \cup |\alpha'|))$.
+\item If $D,D'$ are pseudo-divisors on $X$ and $\alpha$ is a $k$-cycle on $X$, then 
+	\[
+	(D+D') \cdot \alpha = D\cdot \alpha + D' \cdot \alpha
+	\]
+in $A_{k-1}((|D| \cup |D'|) \cap |\alpha|)$.
+\item Projection Formula: Let $D$ be a pseudo-divisor on $X$, $f: X' \to X$ a proper morphism, $\alpha$ a $k$-cycle on $X'$ and $g$ the morphism from $f^{-1}(|D| \cap |\alpha|)$ to $|D| \cap f(|\alpha|)$ induced by $f$ then
+	\[
+	g_*(f^*D \cdot \alpha)= D \cdot f_*\alpha
+	\]
+in $A_{k-1}(|D| \cap f(|\alpha|))$. 
+\item Let $D$ be a pseudo-divisor on $X$, $f: X' \to X$ a flat morphism of relative dimension $n$, $\alpha$ a $k$-cycle on $X$, and $g$ the induced morphism from $f^{-1}(|D| \cap |\alpha|)$ to $|D| \cap |\alpha|$. Then 
+	\[
+	f^*D \cdot f^*\alpha = g^*(D \cdot \alpha)
+	\]
+in $A_{k+n-1}(f^{-1}(|D| \cap |\alpha|))$.
+\item If $D$ is a pseudo-divisor on $X$ whose line bundle $\co_X(D)$ is trivial and $\alpha$ is a $k$-cycle on $X$, then $D \cdot \alpha = 0$ in $A_{k-1}(|\alpha|)$.
+\end{enumerate}
+\end{prop}
+
+
+\subsection{Commutativity of Intersection Classes}
+
+
+\begin{thmm}
+Let $D,D'$ be Cartier divisors on an $n$-dimensional variety $X$. Then
+	\[
+	D \cdot [D'] = D' \cdot [D]
+	\]
+in $A_{n-2}(|D| \cap |D'|)$.
+\end{thmm}
+
+
+\subsection{Chern Class of a Line Bundle}
+
+
+Suppose $E$ is a vector bundle on $X$. Now $c_i(E)$ is something that operates on $A_*X$
+	\[
+	c_i(E) \cap - : A_k X \to A_{k-i} X
+	\]
+Line bundles will only have a first Chern class. Let $L$ be a line bundle on a scheme $X$. For any $k$-dimensional subvariety $V$ of $X$, the restriction $L\big|_V$ of $L$ is isomorphic to $\co_V(C)$ for some Cartier divisor $C$ on $V$, determined up to linear equivalence. The Weil divisor $[C]$ determines a well-defined element in $A_{k-1}X$ which we denote by $c_1(L) \cap [V]$.
+	\[
+	c_1(L) \cap [V]= [C]
+	\]
+$[c] \in A_{k-1}V$. This uses the injection $i: V \to X$ which is proper and proper push forward. This extends by linearity to define a homomorphism $\alpha \mapsto c_1(L) \cap \alpha$ from $Z_k \to X \to A_{k-1}X$. If $L=\co_X(D)$ for a pseudo-divisor $D$ on $X$, it follows from the definition of intersection class that
+	\[
+	c_1(\co_X(D)) \cap \alpha = D \cdot \alpha
+	\]
+in $A_{k-1}X$. 
+
+
+\begin{prop} \hfill
+\begin{enumerate}
+\item If $\alpha$ is rationally equivalent to 0 on $X$, then $c_1(L) \cap \alpha=0$. There is therefore an induced homomorphism
+	\[
+	c_1(L) \cap - : A_k X \to A_{k-1}X
+	\]
+\item Commutativity: If $L,L'$ are line bundles on $X$, $\alpha$ a $k$-cycle on $X$, then $c_1(L) \cap (c_1(L') \cap \alpha)= c_1(L') \cap (c_1(L) \cap \alpha)$. 
+\item Projection Formula: If $f: X' \to X$ is a proper morphism, $L$ is a line bundle on $X$, $\alpha$ a $k$-cycle on $X'$, then
+	\[
+	f_*(c_1(f^*L) \cap \alpha)= c_1(L) \cap f_*(\alpha)
+	\]
+in $A_{k-1}X$.
+\item Flat Pull-back: If $f: X' \to X$ is flat of relative dimension $n$, $L$ a line bundle on $X$, $\alpha$ a $k$-cycle on $X$ then
+	\[
+	c_1(f^*L) \cap f^*\alpha= f^*(c_1(L) \cap \alpha)
+	\]
+in $A_{k+n-1}X'$.
+\item Additivity: If $L,L'$ are line bundles on $X$, $\alpha$ a $k$-cycle on $X$, then
+	\[
+	c_1(L \otimes L') \cap \alpha= c_1(L) \cap \alpha + c_1(L') \cap \alpha
+	\]
+and
+	\[
+	c_1(L^\vee) \cap \alpha = -c_!(L) \cap \alpha
+	\]
+in $A_{k-1}X$.
+\end{enumerate}
+\end{prop}
+
+
+\subsection{Gysin Map for Divisors}
+
+
+Let $D$ be an effective Cartier divisor on a scheme $X$ and let $i: D \to X$ be the inclusion. There are  Gysin homomorphisms $i^*: Z_k X \to A_{k-1}D$ defined by the formula $i^*(\alpha)=D \cdot \alpha$, where $D \cdot \alpha$ in the intersection class in $A_{k-1}D$ defined previously. This was an advantage of defining things in the smallest possible place. If $\alpha \in Z_k X$ and $D$ is Cartier, then $D \cdot \alpha \in A_{k-1}X$ and $D\cdot \alpha \in A_{k-1}(|D| \cap |\alpha|)$.
+
+\begin{prop}
+\begin{enumerate}[(a)]
+\item If $\alpha$ is rationally equivalent to zero on $X$, then $i^*\alpha=0$. There are therefore induced homomorphisms 
+	\[
+	i^*: A_kX \to A_{k-1}D
+	\]
+\item If $\alpha$ is a $k$-cycle on $X$ then
+	\[
+	i_* i^*(\alpha)= c_1(\co_X(D)) \cap \alpha
+	\]
+\item If $\alpha$ is a $k$-cycle on $D$, then
+	\[
+	i^*i_*(\alpha)= c_1(N) \cap \alpha
+	\]
+where $N=i^*\co_X(D)$, $N$ as this is the normal bundle.
+\item If $X$ is purely $n$-dimensional, then	
+	\[
+	i^*[X]=[D]
+	\]
+in $A_{n-1}D$.
+\item If $L$ is a line bundle on $X$ then $i^*(c_1(L) \cap \alpha)= c_1(i^*L) \cap i^*\alpha$ in $A_{k-2}D$ for any $k$-cycle on $X$.
+\end{enumerate}
+\end{prop}
+
+
+\begin{ex}
+Let $L$ be a line bundle on $X$, $p: L \to X$ the projection, $i: X \to L$ the imbedding of $X$ in $L$ by the zero section. Then $i^*(p^*\alpha)=\alpha$ for all $\alpha \in A_kX$. One concludes from an earlier proposition that $p^*: A_k X \to A_{k+1}L$ is an isomorphism:
+
+Let $i: X \to L$ is the embedding of $X$ in $L$ by the zero section. Let $\{U_i\}$ be an open cover of $X$ such that $p^{-1}(U_i) \cong U_i \times \A^1$ and let $g_{ij}$ be the transition data on $U_i \cap U_j$. Over each $U_i$, we have a section $s_i: U_i \to U_i \times \A^1$. Now $s_i(x)=(x,0)$. If you want to do this at the scheme level, assume $U_I=\spec B_i$ then $U_i \times \A^1=\spec B_i[t]$ and we want a ring homomorphism $B_i[t] \to B_i$---evaluation at $t=0$ works. Since the transition data $g_{ij}$ are linear on fibers 0 goes to 0, so all the $s_i$'s path together to give the zero section. Now $i: X \to L$, then $i^*(p^*\alpha)=\alpha$ for all $\alpha \in A_k X$ the flat pull-back $i^*$ is Gysin homomorphism. To show $i^*$ applies, we need to show $i(X)$ is an effective Cartier divisor. So we need show that it is locally the zeros of a single equation. On each $U_i \times \A^1$, if $t$ is the coordinate on $\A^1$, $i(X)=\{t=0\}$, $\alpha= \sum n_v[V]$. We do it one $V$ at a time. Let $U_I$ be any $U_i$ such that $U_i \cap V \neq \emptyset$. Call $V_i=U_i \cap V$. We have flat pull-back $[f^{-1}(V_i)]=[V_i \times \A^1]$. Now $i^*$ does not need to go to pseudo-divisors because the Cartier divisors pulls back well: $D \cdot [V_i \times \A^1]$. So we pull back the Cartier divisor $i(X)$ to $V_i \times \A^1$ and then take the associated Weil divisor. The equation for $i(X)$ on $U_i \times \A^1$ was $t=0$ and when we pull back to $V_i \times \A^1$, we just take $t=0$. The associated Weil divisor is just $[V_i]$. One concludes from the following proposition that $p^*: A_kX \to A_{k+1}L$ is an isomorphism. If $p^*$ was not injective, you could not have $i^*p^*\alpha=\alpha$ for all $\alpha$.
+\end{ex}
+
+
+\begin{prop}
+Let $p: E \to X$ be an affine bundle of rank $n$, then the flat pull-back $p^*: A_k \to A_{k+n} E$ is surjective for all $k$.
+\end{prop}
+
+
+\begin{thmm}
+Let $E$ be the vector bundle of rank $r$ on a scheme $X$ with projection $\pi: E \to X$. Then the flat pull-back $\pi^*: A_{k-r} \to A_k E$ is an isomorphism for all $k$.
+\end{thmm}
+
+
+
+
+
+\section{Vector Bundles and Chern Classes}
+
+
+The tautological bundles on $\P^n$ is a line bundle on $\P^n$, denoted $\co(-1)$ or $\co_{\P^n}(-1)$. Now $\P^n$ is the set of lines through the origin in $\A^{n+1}$. Let $\pi: \co(-1) \to \P^n$ be the tautological bundle. For each $P \in \P^n$, $\pi^{-1}(P)$ is some line: $\pi^{-1}(P)=P$, where $P$ is a point in $\P^n$ and $P$ on the right is the line in $\A^{n+1}$ for which $P \in \P^n$ represents.
+	\[
+	\begin{tikzcd}
+	\co(-1) \arrow[hook]{r} \arrow[swap]{dr}{\pi} & \A^{n+1} \times \P^n \arrow{d}{p \text{ projection}} \\
+	& \P^n
+	\end{tikzcd}
+	\] 
+Let $[a_0,\ldots,a_n]$ be the homogeneous coordinates on $\P^n$ and $(x_0,\ldots,x_n)$ be the Cartesian coordinates on $\A^{n+1}$. Now $[a_0,\ldots,a_n] \in \P^n$ represents the line through the origin and $(a_0,\ldots,a_m)$, call this line $L$. Now $(x_0,\ldots,x_n) \in L$ if and only if $(x_0,\ldots,x_n)$ is a multiple of $(a_0,\ldots,a_n)$ if and only if the rank of $\begin{bmatrix} a_0 & \cdots & a_n \\ x_0 & \cdots & x_n \end{bmatrix}=1$ if and only if all the $2 \times 2$ minor determinants are 0. The equations are $a_ix_j-a_jx_i=0$ and $0 \leq i \neq j \leq n$. Notice those equations make sense on all $\A^{n+1} \times \P^n$. 
+	\[
+	\co(-1)= Z(\{a_ix_j - a_j x_i \colon 0 \leq i\neq j \leq n\})
+	\]
+Now we show that $\co(-1)$ defined this way is a line bundle. In $\P^n$, let $U_i=\{a_i \neq 0\}$ the standard affine opens. Over $U_i$, we can modify some of the equations for $\co(-1)$
+	\[
+	x_j= \dfrac{a_j}{a_i} x_i; \quad i\neq j, i=0,\ldots,n
+	\]
+That means that for any $P \in U_i$, $x_i$ can be taken as a coordinate on $\pi^{-1}(P)$. We have a map $f_i: \pi^{-1}(U_i) \to U_i \times \A^1$ given by $(x_0,\ldots,x_n,a_0,\ldots,a_n) \mapsto (a_0,\ldots,a_n,x_i)$ and a reverse map $f^{-1}_i$ given by $(a_0,\ldots,a_n,x_i) \mapsto \left(\frac{a_0}{a_i} x_i,\ldots, x_i, \ldots, \frac{a_n}{a_i} x_n, a_0,\ldots,a_n\right)$. What are the transition functions on $U_i \cap U_j$? 
+	\[
+	\begin{split}
+	x_j&= \dfrac{a_j}{a_i} x_i \\
+	g_{ij}= \dfrac{a_j}{a_i}
+	\end{split}
+	\]
+are regular nonzero functions on $U_i \cap U_j$. Does this line bundle come from a Cartier divisor? Yes as $\P^n$ is nonsingular. Take the standard affine opens $(U_i,f_i)$, where $f_i=a_i/a_0$ or $a_i/a_j$ for any fixed $j$ or $a_i/L$, where $L$ is any fixed homogeneous linear polynomial. We move from Cartier to line bundle:
+	\[
+	g_{ij}= \dfrac{f_i}{f_j}= \dfrac{a_i/a_0}{a_j/a_0} = \dfrac{a_i}{a_j}
+	\]
+What is the Weil divisor that goes with the Cartier divisor? 
+
+
+\begin{prop}
+$\Pic \P^n \cong A_{n-1} \P^n \cong \Z$ and as a generator you may take $[H]$, where $H$ is any hyperplane.
+\end{prop}
+
+\pf $\Pic \P^n \cong A_{n-1} \P^n$ as $\P^n$ is nonsingular. Let $H_0=\{a_0=0\}$ and $U_0=\P^n \setminus H_0$. We have an exact sequence
+	\[
+	A_{n-1}H_0 \ma{} A_{n-1} \P^n \ma{} A_{n-1} U_0 \ma{} 0
+	\]
+We have $A_{n-1}H_0=\Z$ and $U_0 \cong \A^{n-1}$ and $A_{n-1} U_0 \cong 0$. Now $A_{n-1} \P^n$ is at most $\Z$ generated by $[H_0]$. Any rational function on $\P^n$ has the form $F(x_0,\ldots,x_n)/G(x_0,\ldots,x_n)$, where $F,G$ are homogeneous of the same degree. Their divisors all have net degree 0. Now $r[H_0] \sim s[H_0]$ if and only if $r=s$. Therefore, $A_{n-1} \P^n$ is exactly $\Z$. \qed \\
+
+When $k[H_0]$ is converted to a line bundle, it is denoted $\co_{\P^n}(k)$. 
+	\[
+	\begin{split}
+	\co_{\P^n}(k) \otimes \co_{\P^n}(l) &= \co_{\P^n}(k+l) \\
+	\co_{\P^n}(k)^*&= \co_{\P^n}(-k)
+	\end{split}
+	\]
+
+
+
+
+
+\section{Projective Bundles and Cones}
+
+
+By analogy with Fulton's definition B.3.1 of vector bundles, you can similarly define projective bundles. A projective bundle $P$ of rank $r$ on a scheme $X$ is a scheme $P$ equipped with a morphism $p: P \to X$ satisfying the following condition: there must be an open covering $\{U_i\}$ of $X$ and isomorphisms $\phi_i$ of $p^{-1}(U_i)$ with $U_i \times \P^r$ over $U_i$ such that over $U_i \times U_j$, the composites $\phi_i \circ \phi_j^{-1}$ are linear, i.e. given by
+	\[
+	g_{ij}: U_i \cap U_j \ma{} \PGL(r+1,k)
+	\]
+The transition functions satisfy $g_{ik}=g_{ij} g_{jk}$, $g_{ij}^{-1}=g_{ji}$, and $g_{ii}=1$. Conversely, any such transition functions determine a projective bundle. Given the canonical map $\GL(r+1,k) \to \PGL(r+1,k)$ the following is obvious: given a vector bundle $\pi: E \to X$ of rank $r+1$, one obtains a projective bundle $p: P(E) \to X$ of rank $r$ such that for any $x \in X$, $p^{-1}(x)=\P(\pi^{-1}(x))$. A little less obvious, though not difficult, one also gets a line bundle $\co_{P(E)}(-1)$ on $P(E)$ such that for each $x \in X$, $\co_{P(E)}(-1)$ restricted to $P^{-1}(x)$ is $\co_{P^{-1}(x)}(-1)$. Even more non-obvious is that you can construct a projective bundle, denoted $P(E \oplus 1)$ with its tautological bundle $\co_{P(E\oplus 1)}(-1)$. There is a closed imbedding $P(E) \to P(E\oplus 1)$ and the complement is $E$. Now if $E$ has rank $r+1$, then each fiber is an $\A^{n+1}$ and in $P(E)$ each fiber is a $\P^r$ while in $P(E \oplus 1)$ each fiber is a $\P^{r+1}$. This $\P^n$ sits inside the $\P^{r+1}$  and the complement is the $\A^{r+1}$. This is a special case of a more general construction.
+
+
+For more on the topic to come, see Hartshorne Section II.7. Let $S^\cdot=S^0 \oplus S^1 \oplus \cdots$ be a graded sheaf of $\co_X$-algebras on a scheme $X$ such that the canonical map from $\co_X$ to $S^0$ is an isomorphism and $S^0$ is locally generated as an $\co_X$-algebra by $S^1$.
+
+\begin{ex}
+When we were going between locally free sheaves and vector bundles for $\mathcal{E}$ a locally free sheaf, we had the symmetric algebra $S(\mathcal{E})$.
+	\[
+	S(\mathcal{E})(U)= \bigoplus_{i=0}^\infty \text{Sym}^i \mathcal{E}(U)
+	\]
+\end{ex}
+
+\begin{ex}
+Let $X$ be a (noetherian) scheme and $Y \to X$ a closed subscheme. Let $\mathcal{I}$ be the ideal sheaf of $Y$ in $X$. Let $S^\cdot= \oplus_{i=0}^\infty \mathcal{I}^i$. For a vector bundle map $\pi: E \to X$ is flat. For a projective bundle, the map $p: P(E) \to X$ is flat and proper. To $S^\cdot$, we associate the two schemes over $X$: the cone of $S^\cdot$
+	\[
+	C=\spec(S^\cdot), \pi: C \to X
+	\]
+and the projective cone of $S^\cdot$; $\Proj(S^\cdot)$, $p: \Proj(S^\cdot) \to X$. The latter is called the projective cone of $C$ and is denoted $P(C)$. $P(C)=\Proj(S^\cdot)$, $p: P(C) \to X$. On $P(C)$ there is a canonical line bundle, denoted $\co(1)$ or $\co_C(1)$. The morphism $p$ is proper (though perhaps not flat).
+\end{ex}
+
+In the first example, $C$ is the vector bundle associated to $\mathcal{E}$ and $P(C)$ is the associated projective bundle of lines. If $X$ is affine with coordinate ring $A$, then $S^\cdot$ is determined by a graded $A$-algebra, which we also denote by $S^\cdot$. If $x_0,\ldots,x_n$ are generators for $S^1$, then $S^\cdot= [x_0,\ldots,x_n]/I$ for a homogeneous ideal $I$. In this case, $C$ is the affine subscheme of $X \times \A^{n+1}$, defined by the ideal $I$ and $P(C)$ is the subscheme of $X \times \P^n$, defined by $I$. The bundle $\co_C(1)$ is the pull back of the standard line bundle on $\P^n$.
+	\[
+	\begin{tikzcd}
+	P(C) \arrow{r} & X \times \P^n \arrow{d}{\text{projects}} & \\
+	& P^n \arrow[dash]{r} & \co_{\P^n}(1)
+	\end{tikzcd}
+	\]
+In general, you glue these local pieces together. If $S^\cdot S^{\cdot \prime}$ is a surjective graded homomorphism of such graded sheaves of $\co_X$-algebra and $C=\spec(S^\cdot)$, $C'=\spec(S^{\cdot\prime})$ then there are closed imbeddings $C' \hookrightarrow C$, $P(C') \hookrightarrow P(C)$ such that $\co_C(1)$ restricts to $\co_{C'}(1)$. The zero section imbedding of $X$ in $C$ is determined by the augmentation homomorphism from $S^\cdot$ to $\co_X$ which vanishes on $S^{i}$ for $i>0$ and is the canonical isomorphism of $S^0$ with $\co_X$. The $C$ associated to $\co_X$ is $X$. If $C=\spec(S^\cdot)$ is a cone on $X$ and $f: Z \to X$ is a morphism, the pull back $f^*C=C \times_X Z$ is the cone on $Z$ defined by the sheaf of $\co_Z$-algebras $f^*S^\cdot$. When $Z \subset X$, we write $\Cl_Z$. 
+
+
+Let $z$ be a variable, $S^\cdot[z]$ is the graded algebra whose $n$th piece is
+	\[
+	S^n \oplus S^{n-1}z \oplus \cdots \oplus S^1 z^{n-1} \oplus S^0 z^n
+	\]
+The corresponding cone is denoted $C\oplus 1$. The cone $P(C\oplus1)$ is called the projective completion of $C$. The element $z$ in $(S^\cdot[z])'$ determines a regular section of $\co_{C\oplus 1}(1)$ whose zero scheme is canonically isomorphic to $P(C)$. $\co(1)$ corresponded to the divisor $z(x_i)$ a hyperplane in $\P^n$ was a $\P^{n-1}$. The complement to $P(C)$ in $P(C\oplus 1)$ is canonically isomorphic to $C$. $P(C)$ is called the hyperplane at infinity. 
+
+
+
+
+\section{Vector Bundles and Chern Classes}
+
+\subsection{Segre Classes of Vector Bundles}
+
+Let $E$ be a vector bundle of rank $e+1$ on an algebraic scheme $X$. Let $P=P(E)$ be the projective bundle of lines in $E$, $p=p_E$ the projection from $P$ to $X$ and $\co(1)=\co_E(1)$ denote the canonical line bundle on $P$, i.e. its dual $\co(-1)$ is the tautological subbundle of $p^*E$. When constructing $\co_{\P^n}(-1)$ on a single projective space. Note that it was constructed as a subbundle of the trivial bundle $\P^n \times \A^{n+1}$. For any $x \in X$, $p^{-1}(x)=\P^e$ and $p^*E$ is trivial along fibers. The $\co_{P(E)}(-1)$ looks like the $\co_{\P^e}(-1) \subseteq \P^e \times \A^{e+1}$. Define homomorphisms $\alpha \to s_i(E) \cap \alpha$ from $A_kX$ to $A_{k-i}X$ be the formula 
+	\[
+	s_i(E) \cap \alpha= p_*(c_1(\co(1))^{e+i} \cap p^*\alpha)
+	\]
+where $p^*$ is the flat pull back and $c_!(\co(1))^{e+i} \cap -$ is the iterated first Chern class homomorphism. Note that $p_*$ is the proper push forward. If $\alpha$ has dimension $k$, then $p^*(\alpha)$ has dimension $k+e$ (the fibers are $\P^e$'s) intersecting $e+i$ times with $c_1(\co(1))$ takes the dimension down by $e+i$: $k+e-(e+i)= k-i$. The proper pushforward preserves dimension.
+
+\begin{prop}
+\begin{enumerate}[(a)]
+\item For all $\alpha \in A_kX$
+	\begin{enumerate}[(i)]
+	\item $s_i(E) \cap \alpha=0$ for $i<0$
+	\item $s_0(E) \cap \alpha=\alpha$
+	\end{enumerate}
+\item If $E,F$ are vector bundles on $X$, $\alpha \in A_kX$, then for all $i,j$, $s_i(E) \cap (s_j(F) \cap \alpha)= s_j(F) \cap (s_i(E) \cap \alpha)$.
+\item If $f: X' \to X$ is proper, $E$ a vector bundle on $X$, $\alpha \in A_*X'$,  then for all $i$
+	\[
+	f_*(s_i(f^*E) \cap \alpha)= s_i(E)\cap f_*(\alpha)
+	\]
+\item If $f: X' \to X$ is flat, $E$ a vector bundle on $X$, $\alpha \in A_*X$, then for all $i$, 
+	\[
+	s_i(f^*E) \cap f^*\alpha= f^*(s_i(E) \cap \alpha)
+	\]
+\item If $E$ is a line bundle on $X$, $\alpha \in A_*X$, then	
+	\[
+	s_1(E)= -c_1(E) \cap \alpha
+	\]
+\end{enumerate}
+\end{prop}
+
+\begin{cor}
+The flat pullback 
+	\[
+	p^*: A_kX \to A_{k+e}(P(E))
+	\]
+is a split monomorphism.
+\end{cor}
+
+\pf By (a)(ii), an inverse is $\beta \to p_*(c_1(\co_E(1))^e \cap \beta)$. \qed
+
+	\[
+	s_i(E) \cap \alpha= p_*(c_1(\co(1))^{e+i} \cap p^*\alpha)
+	\]
+Now for $i=0$,
+	\[
+	\alpha= s_0(E) \cap \alpha = p_*(c_1(\co(1))^e \cap p^*\alpha)
+	\]
+If you want to show $\alpha=\beta$ in $A_kX$, it is enough to show $p^*\alpha=p^*\beta$ in $A_{k+e} P(E)$.
+
+
+
+\subsection{Chern Classes}
+
+Let $E$ be a vector bundle on a scheme $X$. Consider the formal power series 
+	\[
+	s_t(E)=\sum_{i=0}^\infty s_i(E) t^i=1+s_1(E)t+s_2(E) + \cdots
+	\]
+Define the Chern polynomial
+	\[
+	c_t(E)= \sum_{i=0}^\infty c_i(E) t^i= 1+c_1(E)t+ c_2(E)t^2+ \cdots
+	\]
+to be the inverse power series (which will be shown to be a polynomial):
+	\[
+	c_t(E)= s_t(E)^{-1}
+	\]
+Recalling the power series for $\frac{1}{1-x}$, we have
+	\[
+	\dfrac{1}{1+s_1(E)t+s_2(E)t^2+\cdots}= 1- (s_1(E)t+s_2(E)t^2+\cdots) + (s_1(E)t+s_2(E)t^2+\cdots)^2 - (s_1(E)t+s_2(E)t^2+\cdots)^3 + \cdots
+	\]
+Then we have $c_0(E)=1$, $c_1(E)= -s_1(E)$, $c_2(E)= -s_2(E)+s_1(E)^2$, $c_3(E)= -s_3(E)+2s_1(E)s_2(E)-s_1(E)^3$, etc.. One can find
+	\[
+	c_n(E)= -s_1(E) c_{n-1}(E) - s_2(E)c_{n-2}(E) - \cdots s_n(E)
+	\]
+The $s_i$ are homomorphisms $A_*X \to A_*X$ of degree $-i$, multiplication is composition, and addition is addition. The $c_i$ are homomorphisms $A_* \to A_*$ of degree $-i$. The previous proposition in (b) says that the $s_i$ commute and $\alpha \to c_i(E) \cap \alpha$. 
+
+
+\begin{thmm}
+The Chern classes satisfy the following properties:
+\begin{enumerate}[(a)]
+\item Vanishing: For all vector bundles $E$ on $X$ and all $i>\rank E$, $c_i(E)=0$.
+\item Commutativity: For all vector bundles $E,F$ on $X$ an integers $i,j$ and cycles $\alpha$ on $X$, 
+	\[
+	c_i(E) \cap (c_j(F) \cap \alpha)= c_j(F) \cap (c_i(E) \cap \alpha)
+	\]
+\item Projection Formula: Let $E$ be a vector bundle on $X$, $f: X' \to X$ a proper morphism. Then
+	\[
+	f_*(c_i(f^*E) \cap \alpha)= c_i(E) \cap f_*(\alpha)
+	\]
+for all cycles $\alpha$ on $X_i'$ and all $i$.
+\item Pullback: Let $E$ be a vector bundles on $X$, $f: X' \to X$ a flat morphism. Then 
+	\[
+	c_i(f^*E) \cap f^*(\alpha)= f^*(c_i(E) \cap \alpha)
+	\]
+for all cycles $\alpha$ on $X$ and all $i$.
+\item Whitney Sum: For any exact sequence
+	\[
+	0 \ma{} E' \ma{} E \ma{} E'' \ma{} 0
+	\]
+of vector bundles on $X$, we have
+	\[
+	c_t(E) = c_t(E') \cdot c_t(E'')
+	\]
+i.e., $c_k(E)= \sum_{i+j=k} c_i(E') c_j(E'')$. 
+\item Normalization: If $E$ is a line bundle on a variety $X$, $D$ a Cartier divisor on $X$ with $\co(D) \cong E$, then $c_1(E) \cap [X]=[D]$. 
+\end{enumerate}
+\end{thmm}
+
+The proof of (e) will use that $p^*: A_kP(E) \to A_{k+e}P(E)$ is injective. In many cases when you want to prove some formula about Chern classes, it is okay to make believe that the vector bundles are direct sums of line bundles. 
+
+
+\subsection{Splitting Construction}
+
+
+Given a finite collection of a vector bundles on a scheme $X$< there is a flat morphism $f: X' \to X$ such that 
+\begin{enumerate}[(i)]
+\item $f^*: A_*X \to A_*X'$ is injective
+\item for each $E$ in $\mathcal{S}$, $f^*E$ has a filtration by subbundles
+	\[
+	f^*=E_R \supset E_{r-1} \supset \cdots \supset E_1 \supset E_0=0
+	\]
+with line bundle quotients $L_i=E_i/E_{i-1}$. When $E$ has such a filtration 
+	\[
+	c_t(E)= \prod_{i=1}^r (1+c_1(L_i)t)
+	\]
+\end{enumerate}
+
+To prove (i) and (ii), first observe that it is enough to do it for one bundle $f: X' \to X$. $f^*E$ has the desired filtration as $E$ is a vector bundle on $X$. If you have $g: X'' \to X'$, $f^*f^*E$ will still have that filtration. To do it for one bundle, use induction on $\rank E$. For $\rank E=1$, this is obvious as it is already a line bundle. Assume this is true for rank $r$, we prove for rank $r+1$. $E$ is a vector bundle of rank $r+1$ on $X$. We look at $p: P(E) \to X$. Now $p$ is flat and $p^*$ is projective, $p^*E$ has the tautological line bundle $\co_{P(E)}(-1)$, and $p^*E \supset \co_{P(E)}(-1)$. Let $E'=p^*E/\co_{P(E)}(-1)$. Now $E'$ has rank $r$ so that by induction you have $f: X' \to X$, where $f^*E'$ has the desired filtration:
+	\[
+	f^*E=E_r' \supset E_{r-1}' \supset \cdots \supset E_1' \supset E_0'=0
+	\]
+We have a surjection $s: f^*p^*E \to f^*E'$. Pull back the filtration to $E_{i+1}s^{-1}E_i'$ and the rank goes up by one and ends up at rank 2. The pull back of $\co_{P(E)}(-1)$ gives the last term
+	\[
+	c_t(E)=\prod_{i=1}^r (1+c_1(L_i)t)
+	\]
+Prove Whitney product (sum)
+	\[
+	0 \ma{} E' \ma{} E \ma{} E'' \ma{} 0
+	\]
+exact sequence of vector bundles then $c_t(E)=c_t(E') c_t(E'')$. Find $f: X' \to X$, where both $f^*E'$ and $f^*E''= E/E'$ has the desired filtration. We will use those two filtrations to get a filtration on $f^*E$. Since $f^*$ is injective if we can prove $c_t(f^*E)=c_t(f^*E')c_t(f^*E'')$, we will have it without the $f^*$'s. Forget about $f^*$. $E$ has rank $r$, $E'$ has rank $r'$, $E''$ has rank $r''$, and $r'+r''=r$. We have
+	\[
+	\begin{split}
+	E'&= E_{r'}' \supset \cdots \supset L_i' \\
+	E''&= E_{r''}'' \supset \cdots \supset L_i''
+	\end{split}
+	\]
+of line bundle quotients. We have a surjection $s: E \to E''=E/E'$. Pull back the filtration $E''$ and we obtain a filtration of $E$ that ends at $E'$. Then we have an injection $E' \to E$ and add the filtration of $E'$ to that to get a full filtration of $E$. The line bundle quotients for that are all the $L_i$'s and $L_i''$'s. 
+	\[
+	\begin{split}
+	c_t(E)&= \prod_{\text{all } L_i', L_i''} (1+c_1(L)t) \\
+	c_t(E')&= \prod_{\text{all } L_i'} (1+c_1(L)t) \\
+	c_t(E'')&= \prod_{\text{all }L_i'} (1+c_1(L)t)
+	\end{split}
+	\]
+Why is it called the splitting principle not the filtration principle? If $E$ was a direct sum of line bundles $E=\oplus_{i=1}^r L_i$, you could get a filtration
+	\[
+	E=E_r \supset E_{r-1}=\bigoplus_{i=1}^{r-1} L_i \supset E_{r-2}=\bigoplus_{i=1}^{r-2} L_i \supset \cdots
+	\]
+If you have a filtration, do you get a direct sum? No! You need lots of short sequences to split
+	\[
+	L_i= E_i/E_{i-1}
+	\]
+	\[
+	0 \ma{} E_{i-1} \ma{} E_i \ma{} L_i \ma{} 0
+	\]
+In the Whitney Sum, it did not require that the short exact sequence split. For Chern class calculations, you can compute as if it did split. 
+
+
+\subsection{Splitting Principle}
+
+Given a vector bundle $E$ for Chern class calculations you image that it splits, say $E=\oplus_{i=1}^r L_i$, set $\alpha_i=c_1(L_i)$.
+	\[
+	\begin{split}
+	c_t(E)&= \prod_{i=1}^r (1+\alpha_it) \\
+	c_1(E)= \sum_{i_1<i_2<\cdots<i_i} \alpha_{i_1}\alpha_{i_2}\cdots \alpha_{i_l}
+	\end{split}
+	\]
+\begin{enumerate}[(a)]
+\item Dual Bundles: $c_i(E^\vee)= (-1)^i c_i(E)$ and $c_t(E^\vee)=\prod_{i=1}^r (1-\alpha_i t)$.
+\item Tensor Products: $E$ has rank $r$, $F$ has rank $s$, $E=\oplus_{i=1}^r L_i$, $F=\oplus_{i=1}^s M_i$, $E \otimes F= \oplus_{i=1,j=1}^{r,s} L_i \otimes M_j$. 
+	\[
+	\begin{split}
+	\alpha_i&=c_1(L_i) \\
+	\beta_j&=c_1(M_j) \\
+	c_t(E)&= \prod_{i=1}^r (1+\alpha_it) \\
+	c_t(F)&=\prod_{j=1}^s (1+\beta_jt) \\
+	c_t(E\otimes F)&= \prod_{i,j=1}^{r,s} ( 1 + (\alpha_i + \beta_j)t)
+	\end{split}
+	\]
+Let's try to actually use this in the case $r=s=2$.
+	\[
+	c_t(E)=(1+\alpha_1)(1+\alpha_2 t)=1(\alpha_1+\alpha_2)t + \alpha_1\alpha_2 t^2
+	\]
+and $c_1(E)=\alpha_1+\alpha_2$ and $c_2(E)=\alpha_1\alpha_2$. Similarly, $c_1(F)=\beta_1+\beta_2$ and $c_2(F)=\beta_1\beta_2$. Then
+	\[
+	c_t(E \otimes F)= (1+(\alpha_1+\beta_1)t)(1+(\alpha_1+\beta_2)t)(1+(\alpha_2+\beta_1)t)(1+(\alpha_2+\beta_2)t)
+	\]
+\item Exterior Powers
+	\[
+	c_T(\wedge^p E)= \prod_{i_1<\cdots<i_p} (1+(\alpha_{i_1} + \cdots + \alpha_{i_p})t)
+	\]
+\end{enumerate}
+
+\begin{lem}
+Assume that $E$ is filtered as above, with line bundle quotients $L_1,\ldots,L_r$. Let $s$ be a section of $E$ and let $Z$ be a closed subset of $X$ where $s$ vanishes. Then for any $k$-cycle $\alpha$ on $X$, there isa  $(k-r)$-cycle $\beta$ on $Z$ with
+	\[
+	\prod_{i=1}^r c_1(L_i) \cap \alpha = \beta
+	\]
+\end{lem}
+
+In general, a vector bundle might not have a section. In particular, if $s$ is nowhere 0, then $\prod_{i=1}^r c_1(L_i)=0$.
+
+Let's examine the proof for $r=1$. For any $k$-cycle on $X$, there is a $(k-1)$-cycle $\beta$ on $Z$ with $c_1(L_1) \cap \alpha=\beta$. Let $L$ be a line bundle on a scheme $X$. For any $k$-dimensional subvariety $V$ of $X$, the restriction $L\big|_V$ of $L$ to $V$ is isomorphic to $\co_V(C)$ for some Cartier divisor $C$ on $V$. This is determined up to linear equivalence. The Weil divisor $[C]$ determines a well-defined element in $A_{k-1}(X)$ which we denote by $c_1(L) \cap V$. When a line bundle $L$ has a section, that section determines a Cartier divisor $C$ with $L \cong \co_X(C)$. The associated Weil divisor is just the divisor of the section: $\alpha= \sum n_i[V_i]$. Now in the first case, $V_i \not\subset Z$, $c_1(L) \cap [V]$ restrict the section to $V$ and take its divisor. Its support is in $Z$, $Z \cap V_i$ with multiplicity. In the second case, $V_i \subset Z$, find some Cartier divisor on $V_i$, $L \big|_{V_i}=\co_{V_i}(C)$. Take the associated Weil divisor, lives in $V_i \subset Z$. 
+
+
+The section $s$ determines a section $\overline{s}$ of the quotient bundle $L_r$. 
+	\[
+	L_r= \dfrac{E_r=E}{E_{r-1}}
+	\]
+If $Y$ is the zero scheme of $\overline{s}$, then $(L_r,Y,\overline{s})$ determines a pseudo-divisor $D_r$ on $X$. Intersecting with $D_r$ gives a class $D_r \cdot \alpha$ in $A_{k-1}X$ such that
+	\[
+	c_1(L_r) \cap \alpha= j_*(D_r \cdot \alpha)
+	\] 
+Intersecting with Chern classes was consistent with intersecting with pseudo-divisors, $j: Y \hookrightarrow X$. By the projection formula
+	\[
+	\prod_{i=1}^r c_1(L_i) \cap \alpha = j_*(\prod_{i=1}^r c_1(j_* L_i) \cap (D_r \cdot \alpha))
+	\]
+The bundle $j^*E_{r-1}$ has a section, induced by $s$, whose zero set is $Z$.
+	\[
+	\begin{split}
+	E_r &\supset E_{r-1} \\
+	E_r/E_{r-1}&=L_r
+	\end{split}
+	\]
+where $s$ is a section of $E_r$. $Y$ is where $\overline{s}=0$ which is where $s$ lives in $E_{r-1}$ so restrict to $Y$---it does induce a section. A section of $E_r$ is 0 if and only if it not only lives in $E_{r-1}$ but is 0 there.
+
+By induction on $r$, the term in the parentheses on the right side of the proceeding formula is represented by a cycle on $Z$, which concludes the proof.
+	\[
+	\prod_{i=1}^r c_1(L_i) \cap \alpha = j_*\left(\prod_{i=1}^{r-1} c_1(j^*L_i) \cap (D_r \cdot \alpha)\right)
+	\]
+Now $\co(-1) \subset p^*E$. Now locally free sheaves are flat. 
+	\[
+	0 \ma{} \co(-1) \ma{} p^*E \ma{} p^*E/\co(-1) \ma{} 0
+	\]
+	\[
+	0 \ma{} \co(-1) \otimes \co(1) \ma{} p^*E \otimes \co(1) \ma{} p^*E/\co(-1) \otimes \co(1) \ma{} 0
+	\]
+But $\co(-1) \otimes \co(1)=0$, i.e. to a nowhere vanishing section of $p^*E \otimes \co(1)$. Since $p^*E \otimes \co(1)$ has a filtration with quotient line bundles $p^*L_i \otimes \co(1)$. The filtration for $E$ on $X$ pulls back to a filtration for $p^*E$ on $P(E)$ then tensor with $\co(1)$ and use flatness. 
+
+
+The lemma also implies $\prod_{i=1}^r c_1(p^*L_i) \otimes \co(1))=0$. Let $\xi=c_1(\co(1))$ and let $\sigma_i$ (respectively $\tilde{\sigma}_i$ be the $i$th elementary symmetric function of $c_1(L_1), \ldots, c_1(L_r)$, respectively $c_1(p^*L_1), \ldots,c_1(p^* L_r)$). By a previous proposition,
+	\[
+	c_1(p^*L_i \otimes \co(1))=c_1(p^*L_i) + \xi
+	\]
+So the above equation may be written
+	\[
+	\xi^r + \tilde{\sigma}_1 \xi^{r-1} + \cdots + \tilde{\sigma}_r=0
+	\]
+Therefore with $e=r-1$, $\xi^{e+i} + \tilde{\sigma}_1 \xi^{e+i-1}+\cdots+\tilde{\sigma}^{i-1}=0$ for all $i \geq 0$. Multiply through by $\xi^{i-1}$. It follows that for all $\alpha \in A_*X$.
+	\[
+	p_*(\xi^{e+i} \cap p^*\alpha)+p_*(\tilde{\sigma}_1 \xi^{e+i-1} \cap p^*\alpha) + \cdots + p_*(\tilde{\sigma}_r \xi^{i-1} \cap p^*\alpha)=0
+	\]
+Intersecting with $p^*\alpha$, then $p_*$ is the whole thing. From the definition of Segre classes and the projection formula, this says
+	\[
+	s_i(E) \cap \alpha + \sigma_1s_{i-1}(E) \cap \alpha + \cdots + \sigma_r s_{i-r}(E) \cap \alpha =0
+	\]
+$s_i(E) \cap \alpha = p_*(c_1(\co(1))^{e+i} \cap p^*\alpha)$. Flat pullbacks, not the projection formula give $c_1(p^*L_i) \cap \alpha p^*\alpha=\alpha^*(c_1(L_i) \cap \alpha)$, $p_*(c_1(\co(1))^{e+i} \cap (c_1(p^*L_i) \cap p^*\alpha)$. Then $\xi \to c_1(\co(1))^{e+i}$ and
+	\[
+	\prod_{i=1}^r \big(1+ c_1(L_i)t\big)= (1+\sigma_1t + \cdots + \sigma_r t^r) s_t(E)=1
+	\]
+
+
+\begin{ex}
+$\ch(E)$ of a bundle $E$ is defined by the formula
+	\[
+	\ch(E):= \sum_{i=1}^r \exp(\alpha_i)
+	\]
+where $\exp(x)=e^x=\sum_{n=0}^\infty \frac{x^n}{n!}$ and $\alpha_1,\ldots,\alpha_r$ are the Chern roots of $E$. The first few terms are 
+	\[
+	\ch(E)=r + c_1 + \frac{1}{2}(c_1^2-2c_2)+ \frac{1}{6}(c_1^3-3c_1c_2+3c_3) + \frac{1}{24}(c_1^4 - 4c_1^2c_2+4c_1c_3+2c_2^2-4c_4) + \cdots
+	\]
+and $c_t(E)=1+c_1t+c_2t^2+\cdots$, $c(E)=\prod_{i=1}^r (1+\alpha_i)=1+\sum_{i=1}^r \alpha_i + \sum_{i<j} \alpha_i \alpha_j$.
+	\[
+	\begin{split}
+	c_1(E)&= \sum_{i=1}^r \alpha_i \\
+	c_2(E)&= \sum_{i<j} \alpha_i \alpha_j \\
+	\ch(E)&= \sum_{i=1}^r 1+ \alpha_i + \frac{1}{2} \alpha_i^2 + \cdots= r+ \sum_{i=1}^r \alpha_i + \frac{1}{2} \sum_{i=1}^r \alpha_i^2	
+	\end{split}
+	\]
+But then $c_1^2=\left(\sum_{i=1}^r \alpha_i\right)^2= \sum_{i=1}^r \alpha_i^2 + 2 \sum_{i<j} \alpha_i \alpha_j$ and $c_1^2-2c_2=\sum_{i=1}^r \alpha_i^2$. Then the $n$th term is $\frac{p_n}{n!}$, where $p_n$ is determined inductively by Newton's formula
+	\[
+	p_n - c_1p_{n-1} + c_2 p_{n-2} -  \cdots + (-1)^{n-1} c_{n-1} p_1 + (-1)^n n c_n=0
+	\]
+For an exact sequence of vector bundles as in the theorem $\ch(E)=\ch(E')+\ch(E'')$ in
+	\[
+	0 \ma{} E' \ma{} E \ma{} E'' \ma{} 0
+	\]
+we have $\ch(E \otimes E')=\ch(E)\ch(E')$
+\end{ex}
+
+\begin{ex}
+The Todd class $\td(E)$ of a vector bundle $E$ is defined by the formula:
+	\[
+	\td(E)=\prod_{i=1}^r Q(\alpha_i)
+	\]
+where $Q(x)=\frac{x}{1-e^{-x}}= 1 + \frac{1}{2}x+ \sum_{k=1}^\infty (-1)^{k-1} \frac{B_k}{(2k)!} x^{2k}$ and $B_k$ is the $k$th Bernoulli number and $\alpha_1,\ldots,\alpha_r$ are the Chern roots of $E$.
+	\[
+	\td(E)= 1+\frac{1}{2} c_1 + \frac{1}{12}(c_1^2+c_2) + \frac{1}{24}(c_1c_2) + \frac{1}{720} (-c_1^4 + 4c_1^2c_2+ 3c_2^2+c_1c_3-c_4) + \cdots
+	\]
+	\[
+	0 \ma{} E' \ma{} E \ma{} E'' \ma{} 0
+	\]
+$\td(E)=\td(E') \cdot \td(E'')$.
+\end{ex}
+
+\begin{ex}
+(cf. Borel--Serre (1) Lemma 18) Let $E$ be a vector bundle of rank $r$. Then $\sum_{p=0}^r (-1)^P \ch(\wedge^p E^\vee)=c_r(E) \cdot \td(E)^{-1}$. The most important place they come up is in the Grothendieck-Riemann-Roch Theorem. 
+\end{ex}
+
+
+
+
+
+\subsection{Rational Equivalence on Bundles}
+
+Let $E$ be a vector bundle of rank $r=e+1$ on a scheme $X$. Let $\pi: E \to X$ and $p: P(E) \to X$. On $P(E)$, we have $\co(1)$.
+
+\begin{thmm}
+\begin{enumerate}[(a)]
+\item The flat pull-back	
+	\[
+	\pi^*: A_{k-r} X \to A_kE
+	\]
+is an isomorphism for all $k$. 
+\item Each element $\beta$ in $A_kP(E)$ is uniquely expressible in the form $\beta=\sum_{i=0}^e c_1(\co(1))^i \cap p^* \alpha_i$ for $\alpha_i \in A_{k-e+i}X$. Thus there are canonical isomorphisms 
+	\[
+	\bigoplus_{i=0}^e A_{k-e+i} X \cong A_kP(E)
+	\]
+\end{enumerate}
+\end{thmm}
+
+\begin{dfn}
+Let $s=s_E$ denote the zero section of a vector bundle $E$; $s$ is a morphism from $X$ to $E$ with $\pi \circ s=1_X$. The result of the previous theorem allows us to define Gysin homomorphisms $s^*: A_k E \to A_{k-r}X$, where $r= \rank E$. $s^*(\beta):=(\pi^*)^{-1}(\beta)$. 
+\end{dfn}
+
+This Gysin homomorphism is important in intersection operation: given any subvariety of $E$ or $k$-cycle $\beta$ on $E$, no matter how it meets the zero section, there is a well-defined class $s^*(\beta)$ in $A_{k-r}X$. The ability to intersect with zero sections of vector bundles will be the basis for the construction of general Gysin homomorphisms and intersection products in later chapters. 

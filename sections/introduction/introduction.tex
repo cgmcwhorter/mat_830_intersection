@@ -1,0 +1,25 @@
+% !TEX root = ../../intersection_theory.tex
+
+\newpage
+\section{Introduction}
+
+
+
+\section*{Motivation}
+
+As a motivating example for the theories that shall follow, recall the following result from Hartshorne:
+
+\begin{theorem*} [I.7.7]
+Let $Y$ be a variety of dimension at least one in $\P^n$ and $H$ be a hypersurface not containing $Y$. Let $Z_1,\ldots,Z_s$ be the irreducible components of $Y \cap H$. Then $\displaystyle \sum_{j=1}^s i(Y, H; Z_j) \deg Z_j = (\deg Y)(\deg H)$
+\end{theorem*}
+
+
+We can reword this result in terms of codimension. Say $Y$ has codimension $r$ (that is, $Y$ has $\dim n-r$), $H$ has codimension 1, and $Z_1,\ldots,Z_r$ have codimension $r+1$. Then we have a map 
+	\[
+	(\codim r\text{ subvarities}) \times (\codim1\text{ subvarities}) \to \codim(r+1) \text{ subvarities}
+	\]
+all with coefficients $Y \times H \to \sum_{j=1}^s i(Y,H; Z_j) Z_j$. We want to generalize this in several ways. For example, we want to replace codimension 1 by codimension $l$:
+	\[
+	(\codim r) \times (\codim l) \to \codim (r+l)
+	\]
+with multiplicity. We also want to get rid of the assumption that $Y \not\subset H$. Moreover, why bother working only in $\P^n$? We will want to do this inside an arbitrary scheme. In Topology, you have something like this with homology and cohomology, e.g. the  cup, and cap product, respectively, for these exact sort of issues. 

@@ -1,0 +1,141 @@
+\documentclass[11pt, twoside]{article}
+
+\usepackage[]{geometry}
+
+\usepackage{
+	amsmath,
+  	amssymb,
+  	amsthm,
+  	%bm,              		% boldsymbol
+  	bookmark,        		% replaces (and loads) hyperref
+	%chngcntr,			% for counterwithin
+	enumerate,
+	fancyhdr,			% better headers
+	float,				% forced image placement
+  	mathrsfs,        	% mathscr
+  	mathtools,       		% allows prescript
+  	microtype,       		% improved looks
+	multicol,
+  	tikz-cd,         		% better commutative diagrams
+  	thmtools,        		% custom end to example environment
+	%totcount,			% define counters
+	%wrapfig,
+	xcolor,
+  	intersection_theory 			% custom style file
+}
+
+
+
+\definecolor{SUOrange}{RGB}{212,69,0}
+
+\usetikzlibrary{calc,matrix,arrows,shapes.geometric,positioning,decorations.pathmorphing}
+\tikzset{snake it/.style={-stealth,
+decoration={snake, 
+    amplitude = .4mm,
+    segment length = 2mm,
+    post length=0.9mm},decorate}}
+
+\usepackage[
+	hyperref = true,      	% links to online documents
+  	backend  = bibtex,    % use bibtex instead of biber
+  	sorting  = nyt,       	% sorts by (name, year, title)
+  	style  = alphabetic 	% citations look like [Har77]
+]{biblatex}
+\addbibresource{rings_mods.bib}
+
+\usepackage[all]{xy}
+\hypersetup{
+	colorlinks = true,
+  	linkcolor  = blue,
+  	urlcolor   = cyan
+}
+\PassOptionsToPackage{hyphens}{url}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{14pt}
+\fancyhead[CE]{}
+\fancyhead[CO]{}
+\fancyhead[RE]{\thepage}
+\fancyhead[LO]{\thepage}
+
+
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[T1]{fontenc}
+
+
+
+\begin{document}
+
+
+
+\pagestyle{empty}
+\begin{flushright}
+\begin{tabular}{ll}
+\raisebox{-.5\height}{\includegraphics[scale=0.25]{syracuse_seal.jpg}} & {\color{SUOrange}\Huge Syracuse University } \\
+\end{tabular}
+\end{flushright}
+\vspace{2in}
+
+{\color{SUOrange} \Huge \noindent MATH 830: \\[0.2cm] Intersection Theory \\[0.2cm] 
+\rule{0.65\textwidth}{0.05cm} \\[0.2cm]}
+
+{\color{SUOrange} \large \noindent Professor: Dr. Steven Diaz \\ Notes By: Caleb McWhorter }
+
+\vfill
+\begin{center} {\huge \color{SUOrange} Fall 2017} \end{center}
+
+
+\newpage
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+\pagestyle{fancy}
+\setcounter{section}{0}
+\setcounter{page}{1}
+
+
+
+
+\input{sections/introduction/introduction.tex}
+\input{sections/equivalences/rational_eq.tex}
+\input{sections/divisors/divisors.tex}
+\input{sections/intersections/intersections.tex}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
